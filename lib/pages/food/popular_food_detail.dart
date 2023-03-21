@@ -5,6 +5,7 @@ import 'package:food_delivery_app/controllers/cart_controller.dart';
 import 'package:food_delivery_app/controllers/popular_product_controller.dart';
 import 'package:food_delivery_app/pages/cart/cart_page.dart';
 import 'package:food_delivery_app/pages/home/main_food_page.dart';
+import 'package:food_delivery_app/routes/route_helper.dart';
 import 'package:food_delivery_app/utils/app_constants.dart';
 import 'package:food_delivery_app/widgets/app_column.dart';
 import 'package:food_delivery_app/widgets/app_icon.dart';
@@ -66,26 +67,23 @@ class PopularFoodDetail extends StatelessWidget {
                 child:
               AppIcon(icon: Icons.arrow_back_ios),),
               GetBuilder<PopularProductController>(builder:(controller){
-                return Stack(
+                return GestureDetector(
+                  onTap: (){
+                    if(controller.totalItems>=1)
+                    Get.toNamed(RouteHelper.getCartPage());
+                  },
+                  child: Stack(
                   children: [
-                    GestureDetector(
-                onTap: (){
-                  Get.to(()=>CartPage());
-                },
-                child:
-              AppIcon(icon: Icons.shopping_cart_outlined),),
+              AppIcon(icon: Icons.shopping_cart_outlined),
                     
-                    Get.find<PopularProductController>().totalItems>=1?
+                    controller.totalItems>=1?
                     Positioned(
                       right: 0, top: 0,
-                     
-                      child: GestureDetector(
-                        onTap: (){
-                          Get.to(()=>CartPage());
-                        },
+              
                         child: AppIcon(icon: Icons.circle, size: 20,
                       iconColor: Colors.transparent,
-                      backgroundColor: AppColors.mainColor,), ),
+                      backgroundColor: AppColors.mainColor,), 
+                     
                     ):
                     Container(),
                     Get.find<PopularProductController>().totalItems>=1?
@@ -96,6 +94,7 @@ class PopularFoodDetail extends StatelessWidget {
                     ):Container()
 
                   ],
+                ),
                 );
               }, )
             ],

@@ -41,21 +41,21 @@ class RecommendedFoodDetail extends StatelessWidget {
               ),
               //AppIcon(icon: Icons.shopping_cart_outlined)
               GetBuilder<PopularProductController>(builder:(controller){
-                return Stack(
+                return GestureDetector(
+                  onTap: (){
+                    if(controller.totalItems>=1)
+                    Get.toNamed(RouteHelper.getCartPage());
+                  },
+                  child: Stack(
                   children: [
-                    GestureDetector(
-                      onTap: (){
-                        Get.to(()=>CartPage());
-                      },
-                      child: AppIcon(icon: Icons.shopping_cart_outlined),
-                    ),
+                AppIcon(icon: Icons.shopping_cart_outlined),
                
                     Get.find<PopularProductController>().totalItems>=1?
                     Positioned(
                       right: 0, top: 0,
                       child: GestureDetector(
                         onTap: (){
-                          Get.to(()=>CartPage());
+                          Get.toNamed(RouteHelper.getCartPage());
                         },
                         child: AppIcon(icon: Icons.circle, size: 20,
                       iconColor: Colors.transparent,
@@ -71,6 +71,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                     ):Container()
 
                   ],
+                )
                 );
               }, )
               

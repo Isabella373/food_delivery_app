@@ -6,6 +6,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:food_delivery_app/AppColors.dart';
 import 'package:food_delivery_app/controllers/cart_controller.dart';
 import 'package:food_delivery_app/pages/home/main_food_page.dart';
+import 'package:food_delivery_app/routes/route_helper.dart';
 import 'package:food_delivery_app/utils/app_constants.dart';
 import 'package:food_delivery_app/utils/dimensions.dart';
 import 'package:food_delivery_app/widgets/app_icon.dart';
@@ -37,7 +38,7 @@ class CartPage extends StatelessWidget {
               SizedBox(width: Dimensions.width20*5,),
               GestureDetector(
                 onTap: (){
-                  Get.to(()=>MainFoodPage());
+                  Get.toNamed(RouteHelper.getInitial());
                 },
                 child: AppIcon(icon: Icons.home_outlined,
               iconColor: Colors.white,
